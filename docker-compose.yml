@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  kops:
+    build: .
+    image: costela/kops
+    volumes:
+      - ./.kube:/home/app/.kube
+      - ./.aws:/home/app/.aws
+      - ./.ssh:/home/app/.ssh
+    environment:
+      - KOPS_STATE_STORE
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
