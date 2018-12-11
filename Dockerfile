@@ -2,6 +2,7 @@ FROM ubuntu:18.10
 
 ARG KUBECTL_VERSION=v1.12.3
 ARG KOPS_VERSION=1.10.0
+ARG KOMPOSE_VERSION=v1.16.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -17,7 +18,7 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_
 
 RUN curl -L https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64 -o /usr/local/bin/kops && chmod +x /usr/local/bin/kops
 
-VOLUME [ "/home/app/.kube", "/home/app/.aws" "/home/app/.ssh" ]
+RUN curl -L https://github.com/kubernetes/kompose/releases/download/${KOMPOSE_VERSION}/kompose-linux-amd64 -o /usr/local/bin/kompose && chmod +x /usr/local/bin/kompose
 
 WORKDIR /home/app
 USER app
