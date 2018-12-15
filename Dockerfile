@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openssh-client \
     vim \
     ansible \
+    unzip \
     && useradd -m app
 
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && chmod a+x /usr/local/bin/kubectl
