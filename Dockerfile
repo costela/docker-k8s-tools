@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     ansible \
     unzip \
+    bash-completion \
     && useradd -m app
 
 RUN wget -c -O /usr/local/bin/kubectl --quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error \
