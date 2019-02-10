@@ -4,6 +4,7 @@ ARG KOPS_VERSION=1.11.0
 ARG KUBECTL_VERSION=v1.12.3
 ARG KOMPOSE_VERSION=v1.16.0
 ARG HELM_VERSION=v2.12.3
+ARG GOMPLATE_VERSION=
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
@@ -35,6 +36,10 @@ RUN until wget -c -O /usr/local/bin/kops ${COMMON_WGET_OPTIONS} \
 RUN until wget -c -O /usr/local/bin/kompose ${COMMON_WGET_OPTIONS} \
          https://github.com/kubernetes/kompose/releases/download/${KOMPOSE_VERSION}/kompose-linux-amd64; do sleep 1; done \
          && chmod +x /usr/local/bin/kompose
+
+RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
+        https://github.com/hairyhenderson/gomplate/releases/download/${GOMPLATE_VERSION}}/gomplate_linux-amd64-slim; do sleep 1; done \
+        & chmod +x /usr/local/bin/gomplate
 
 WORKDIR /home/app
 USER app
