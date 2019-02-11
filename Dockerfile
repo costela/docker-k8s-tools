@@ -39,7 +39,7 @@ RUN until wget -c -O /usr/local/bin/kompose ${COMMON_WGET_OPTIONS} \
 
 RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
         https://github.com/hairyhenderson/gomplate/releases/download/${GOMPLATE_VERSION}/gomplate_linux-amd64-slim; do sleep 1; done \
-        & chmod +x /usr/local/bin/gomplate
+        && chmod +x /usr/local/bin/gomplate
 
 WORKDIR /home/app
 USER app
