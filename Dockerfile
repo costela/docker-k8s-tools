@@ -4,7 +4,7 @@ ARG KOPS_VERSION=1.11.0
 ARG KUBECTL_VERSION=v1.12.3
 ARG KOMPOSE_VERSION=v1.16.0
 ARG HELM_VERSION=v2.12.3
-ARG GOMPLATE_VERSION=
+ARG GOMPLATE_VERSION=v3.2.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
