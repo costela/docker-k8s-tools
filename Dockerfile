@@ -1,9 +1,9 @@
 FROM ubuntu:19.04
 
-ARG KOPS_VERSION=1.11.1
+ARG KOPS_VERSION=1.12.0
 ARG KUBECTL_VERSION=v1.14.1
 ARG KOMPOSE_VERSION=v1.16.0
-ARG HELM_VERSION=v2.13.1
+ARG HELM_VERSION=v2.14.0
 ARG GOMPLATE_VERSION=v3.4.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
