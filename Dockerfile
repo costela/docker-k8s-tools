@@ -8,7 +8,7 @@ ARG GOMPLATE_VERSION=v3.5.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ca-certificates \
     curl wget \
     gettext-base \
