@@ -26,8 +26,8 @@ RUN wget -c -O /usr/local/bin/kubectl ${COMMON_WGET_OPTIONS} \
          https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
          && chmod a+x /usr/local/bin/kubectl
 
-RUN wget -c -O - ${COMMON_WGET_OPTIONS}} https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz \
-         | tar -C /usr/local/bin -xz --strip-components=1
+RUN wget -c -O - ${COMMON_WGET_OPTIONS}} https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz \
+         | tar -C /usr/local/bin -xa --strip-components=1
 
 # use "until" to workaround broken retries; github redirects to an authenticated S3 bucket, but when we retry, the auth is stale 
 RUN until wget -c -O /usr/local/bin/kops ${COMMON_WGET_OPTIONS} \
