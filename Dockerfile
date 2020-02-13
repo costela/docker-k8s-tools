@@ -3,6 +3,7 @@ FROM ubuntu:19.10
 ARG KUBECTL_VERSION=v1.17.3
 ARG HELM_VERSION=v3.1.0
 ARG GOMPLATE_VERSION=v3.5.0
+ARG TANKA_VERSION=v0.8.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
@@ -31,6 +32,10 @@ RUN wget -c -O - ${COMMON_WGET_OPTIONS}} https://get.helm.sh/helm-${HELM_VERSION
 RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
         https://github.com/hairyhenderson/gomplate/releases/download/${GOMPLATE_VERSION}/gomplate_linux-amd64-slim; do sleep 1; done \
         && chmod +x /usr/local/bin/gomplate
+
+RUN until wget -c -O /usr/local/bin/tk ${COMMON_WGET_OPTIONS} \
+        https://github.com/grafana/tanka/releases/download/${TANKA_VERSION}/tk-linux-amd64; do sleep 1; done \
+        && chmod +x /usr/local/bin/tk
 
 WORKDIR /home/app
 USER app
