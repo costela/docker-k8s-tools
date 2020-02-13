@@ -1,7 +1,7 @@
 FROM ubuntu:19.10
 
-ARG KUBECTL_VERSION=v1.17.2
-ARG HELM_VERSION=v3.0.3
+ARG KUBECTL_VERSION=v1.17.3
+ARG HELM_VERSION=v3.1.0
 ARG GOMPLATE_VERSION=v3.5.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
