@@ -2,6 +2,7 @@ FROM ubuntu:19.10
 
 ARG KUBECTL_VERSION=v1.18.0
 ARG HELM_VERSION=v3.1.2
+ARG HELM2_VERSION=v2.16.5
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TANKA_VERSION=v0.9.0
 ARG GCLOUD_VERSION=288.0.0
@@ -27,6 +28,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 RUN wget -c -O /usr/local/bin/kubectl ${COMMON_WGET_OPTIONS} \
          https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
          && chmod a+x /usr/local/bin/kubectl
+
+RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM2_VERSION}-linux-amd64.tar.gz \
+         | tar -C /usr/local/bin -xz --strip-components=1 && mv /usr/loca/bin/helm /usr/local/bin/helm2
 
 RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz \
          | tar -C /usr/local/bin -xz --strip-components=1
