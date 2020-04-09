@@ -1,15 +1,13 @@
 version: '3.5'
 
 services:
-  kops:
+  k8s:
     build: .
-    image: registry.cstl.dev/k8s/tools
     volumes:
       - ./.kube:/home/app/.kube
       - ./.aws:/home/app/.aws
       - ./.ssh:/home/app/.ssh
       - ./.bash_history:/home/app/.bash_history
     environment:
-      - KOPS_STATE_STORE
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
