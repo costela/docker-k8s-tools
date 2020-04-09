@@ -30,7 +30,7 @@ RUN wget -c -O /usr/local/bin/kubectl ${COMMON_WGET_OPTIONS} \
          && chmod a+x /usr/local/bin/kubectl
 
 RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM2_VERSION}-linux-amd64.tar.gz \
-         | tar -C /usr/local/bin -xz --strip-components=1 && mv /usr/loca/bin/helm /usr/local/bin/helm2
+         | tar -C /usr/local/bin -xz --strip-components=1 && mv /usr/local/bin/helm /usr/local/bin/helm2
 
 RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz \
          | tar -C /usr/local/bin -xz --strip-components=1
