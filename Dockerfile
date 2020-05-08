@@ -4,7 +4,7 @@ ARG KUBECTL_VERSION=v1.18.2
 ARG HELM_VERSION=v3.2.1
 ARG HELM2_VERSION=v2.16.7
 ARG GOMPLATE_VERSION=v3.5.0
-ARG TANKA_VERSION=v0.9.0
+ARG TANKA_VERSION=v0.10.0
 ARG GCLOUD_VERSION=288.0.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
