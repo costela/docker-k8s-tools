@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:focal
 
 ARG KUBECTL_VERSION=v1.18.2
 ARG HELM_VERSION=v3.2.1
@@ -44,7 +44,7 @@ RUN until wget -c -O /usr/local/bin/tk ${COMMON_WGET_OPTIONS} \
         https://github.com/grafana/tanka/releases/download/${TANKA_VERSION}/tk-linux-amd64; do sleep 1; done \
         && chmod +x /usr/local/bin/tk
 
-RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz
+RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
 
 WORKDIR /home/app
 USER app
