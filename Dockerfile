@@ -1,14 +1,5 @@
 FROM ubuntu:focal
 
-ARG KUBECTL_VERSION=v1.18.2
-ARG HELM_VERSION=v3.2.4
-ARG HELM2_VERSION=v2.16.7
-ARG GOMPLATE_VERSION=v3.5.0
-ARG TERRAFORM_VERSION=0.12.26
-ARG GCLOUD_VERSION=291.0.0
-
-ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
-
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ca-certificates \
     curl wget \
@@ -24,6 +15,17 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && useradd -m app \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
+
+
+ARG KUBECTL_VERSION=v1.18.2
+ARG HELM_VERSION=v3.2.4
+ARG HELM2_VERSION=v2.16.7
+ARG GOMPLATE_VERSION=v3.5.0
+ARG TERRAFORM_VERSION=0.12.26
+ARG GCLOUD_VERSION=297.0.1
+
+
+ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
 RUN wget -c -O /usr/local/bin/kubectl ${COMMON_WGET_OPTIONS} \
         https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
