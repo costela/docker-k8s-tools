@@ -8,7 +8,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     jq \
     openssh-client \
     vim \
-    ansible \
     unzip \
     git \
     bash-completion \
@@ -22,6 +21,7 @@ ARG HELM_VERSION=v3.2.4
 ARG HELM2_VERSION=v2.16.7
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=0.12.26
+ARG PULUMI_VERSION=v2.4.0
 ARG GCLOUD_VERSION=297.0.1
 
 
@@ -40,6 +40,9 @@ RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM_VERSION}
 RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
         | funzip  > /usr/local/bin/terraform \
         && chmod a+x /usr/local/bin/terraform
+
+RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.pulumi.com/releases/sdk/pulumi-${PULUMI_VERSION}-linux-x64.tar.gz \
+        | tar -C /usr/local/bin -xz --strip-components=1
 
 # use "until" to workaround broken retries; github redirects to an authenticated S3 bucket, but when we retry, the auth is stale 
 RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
