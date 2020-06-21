@@ -11,6 +11,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     unzip \
     git \
     bash-completion \
+    python3-venv \
     && useradd -m app \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
