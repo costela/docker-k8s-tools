@@ -11,7 +11,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     unzip \
     git \
     bash-completion \
-    python3-venv \
+    python3-venv python3-wheel \
     && useradd -m app \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
@@ -22,7 +22,7 @@ ARG HELM_VERSION=v3.2.4
 ARG HELM2_VERSION=v2.16.7
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=0.12.26
-ARG PULUMI_VERSION=v2.4.0
+ARG PULUMI_VERSION=v2.5.0
 ARG GCLOUD_VERSION=297.0.1
 
 
