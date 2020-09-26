@@ -24,7 +24,7 @@ ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=0.12.26
 ARG PULUMI_VERSION=v2.10.2
 ARG GCLOUD_VERSION=307.0.0
-
+ARG STERN_VERSION=1.11.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
@@ -51,6 +51,10 @@ RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
         && chmod +x /usr/local/bin/gomplate
 
 RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
+
+RUN wget -c -O /usr/local/bin/stern ${COMMON_WGET_OPTIONS} \
+        https://github.com/wercker/stern/releases/download/$STERN_VERSION/stern_linux_amd64 \
+        && chmod a+x /usr/local/bin/stern
 
 WORKDIR /home/app
 USER app
