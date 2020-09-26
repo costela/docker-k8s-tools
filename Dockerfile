@@ -17,7 +17,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && rm -rf /var/lib/apt/lists/*
 
 
-ARG KUBECTL_VERSION=v1.18.2
+ARG KUBECTL_VERSION=v1.19.2
 ARG HELM_VERSION=v3.3.4
 ARG HELM2_VERSION=v2.16.12
 ARG GOMPLATE_VERSION=v3.5.0
