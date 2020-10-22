@@ -17,13 +17,13 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && rm -rf /var/lib/apt/lists/*
 
 
-ARG KUBECTL_VERSION=v1.19.2
+ARG KUBECTL_VERSION=v1.19.3
 ARG HELM_VERSION=v3.3.4
 ARG HELM2_VERSION=v2.16.12
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=0.12.26
-ARG PULUMI_VERSION=v2.11.2
-ARG GCLOUD_VERSION=307.0.0
+ARG PULUMI_VERSION=v2.12.0
+ARG GCLOUD_VERSION=315.0.0
 ARG STERN_VERSION=1.11.0
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
