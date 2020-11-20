@@ -19,7 +19,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 
 ARG KUBECTL_VERSION=v1.19.3
 ARG HELM_VERSION=v3.4.1
-ARG HELM2_VERSION=v2.17.0
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=0.12.26
 ARG PULUMI_VERSION=v2.12.1
@@ -31,9 +30,6 @@ ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-co
 RUN wget -c -O /usr/local/bin/kubectl ${COMMON_WGET_OPTIONS} \
         https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
         && chmod a+x /usr/local/bin/kubectl
-
-RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM2_VERSION}-linux-amd64.tar.gz \
-        | tar -C /usr/local/bin -xz --strip-components=1 && mv /usr/local/bin/helm /usr/local/bin/helm2
 
 RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz \
         | tar -C /usr/local/bin -xz --strip-components=1
