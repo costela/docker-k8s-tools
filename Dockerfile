@@ -19,6 +19,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 
 ARG KUBECTL_VERSION=v1.20.1
 ARG HELM_VERSION=v3.5.3
+ARG HELMFILE_VERSION=v0.138.7
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=0.14.8
 ARG PULUMI_VERSION=v2.18.2
@@ -45,6 +46,10 @@ RUN wget -c -O - ${COMMON_WGET_OPTIONS} https://get.pulumi.com/releases/sdk/pulu
 RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
         https://github.com/hairyhenderson/gomplate/releases/download/${GOMPLATE_VERSION}/gomplate_linux-amd64-slim; do sleep 1; done \
         && chmod +x /usr/local/bin/gomplate
+
+RUN until wget -c -O /usr/local/bin/helmfile ${COMMON_WGET_OPTIONS} \
+        https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64; do sleep 1; done \
+        && chmod +x /usr/local/bin/helmfile
 
 RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
 
