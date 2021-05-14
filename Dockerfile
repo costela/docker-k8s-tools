@@ -25,6 +25,7 @@ ARG TERRAFORM_VERSION=0.14.8
 ARG PULUMI_VERSION=v2.25.1
 ARG GCLOUD_VERSION=315.0.0
 ARG STERN_VERSION=1.11.0
+ARG FIREBASE_VERSION=v9.10.2
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
 
@@ -50,6 +51,10 @@ RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
 RUN until wget -c -O /usr/local/bin/helmfile ${COMMON_WGET_OPTIONS} \
         https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64; do sleep 1; done \
         && chmod +x /usr/local/bin/helmfile
+
+RUN until wget -c -O /usr/local/bin/firebase ${COMMON_WGET_OPTIONS} \
+        https://github.com/firebase/firebase-tools/releases/download/${FIREBASE_VERSION}/firebase-tools-linux; do sleep 1; done \
+        && chmod +x /usr/local/bin/firebase
 
 RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
 
