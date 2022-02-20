@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -22,7 +22,7 @@ ARG HELM_VERSION=v3.8.0
 ARG HELMFILE_VERSION=v0.142.0
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=1.1.2
-ARG PULUMI_VERSION=v3.19.0
+ARG PULUMI_VERSION=v3.24.1
 ARG GCLOUD_VERSION=315.0.0
 ARG STERN_VERSION=1.11.0
 ARG FIREBASE_VERSION=v9.10.2
