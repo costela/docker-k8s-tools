@@ -11,7 +11,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     unzip \
     git \
     bash-completion \
-    python3-venv python3-wheel \
+    python3-venv python3-wheel python3-cryptography \
     && useradd -m app \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
@@ -57,6 +57,7 @@ RUN until wget -c -O /usr/local/bin/firebase ${COMMON_WGET_OPTIONS} \
         && chmod +x /usr/local/bin/firebase
 
 RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
+ENV CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 RUN wget -c -O /usr/local/bin/stern ${COMMON_WGET_OPTIONS} \
         https://github.com/wercker/stern/releases/download/$STERN_VERSION/stern_linux_amd64 \
