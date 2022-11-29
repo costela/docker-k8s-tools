@@ -21,10 +21,10 @@ ARG KUBECTL_VERSION=v1.22.4
 ARG HELM_VERSION=v3.10.2
 ARG HELMFILE_VERSION=v0.144.0
 ARG GOMPLATE_VERSION=v3.5.0
-ARG TERRAFORM_VERSION=1.1.2
+ARG TERRAFORM_VERSION=1.3.5
 ARG PULUMI_VERSION=v3.33.2
 ARG GCLOUD_VERSION=373.0.0
-ARG STERN_VERSION=1.11.0
+ARG STERN_VERSION=1.22.0
 ARG FIREBASE_VERSION=v9.10.2
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
@@ -59,9 +59,8 @@ RUN until wget -c -O /usr/local/bin/firebase ${COMMON_WGET_OPTIONS} \
 RUN cd /opt/ && wget -c -O - ${COMMON_WGET_OPTINOS} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar -xz && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
 ENV CLOUDSDK_PYTHON_SITEPACKAGES=1
 
-RUN wget -c -O /usr/local/bin/stern ${COMMON_WGET_OPTIONS} \
-        https://github.com/wercker/stern/releases/download/$STERN_VERSION/stern_linux_amd64 \
-        && chmod a+x /usr/local/bin/stern
+RUN wget -c -O - ${COMMON_WGET_OPTIONS} \
+        https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar -C /usr/local/bin -xz
 
 WORKDIR /home/app
 USER app
