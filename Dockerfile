@@ -17,14 +17,15 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && rm -rf /var/lib/apt/lists/*
 
 
-ARG KUBECTL_VERSION=v1.27.2
-ARG HELM_VERSION=v3.12.2
-ARG HELMFILE_VERSION=v0.144.0
+ARG KUBECTL_VERSION=v1.29.2
+ARG K9S_VERSION=v0.32.0
+ARG HELM_VERSION=v3.14.2
+ARG HELMFILE_VERSION=0.162.0
 ARG GOMPLATE_VERSION=v3.5.0
 ARG TERRAFORM_VERSION=1.5.0
 ARG PULUMI_VERSION=v3.33.2
 ARG GCLOUD_VERSION=373.0.0
-ARG STERN_VERSION=1.22.0
+ARG STERN_VERSION=1.28.0
 ARG FIREBASE_VERSION=v9.10.2
 
 ENV COMMON_WGET_OPTIONS "--quiet --show-progress --progress=bar:force --retry-connrefused --retry-on-http-error --retry-on-host-error"
@@ -48,9 +49,8 @@ RUN until wget -c -O /usr/local/bin/gomplate ${COMMON_WGET_OPTIONS} \
         https://github.com/hairyhenderson/gomplate/releases/download/${GOMPLATE_VERSION}/gomplate_linux-amd64-slim; do sleep 1; done \
         && chmod +x /usr/local/bin/gomplate
 
-RUN until wget -c -O /usr/local/bin/helmfile ${COMMON_WGET_OPTIONS} \
-        https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64; do sleep 1; done \
-        && chmod +x /usr/local/bin/helmfile
+RUN until wget -c -O - ${COMMON_WGET_OPTIONS} \
+        https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar -C /usr/local/bin -xz --strip-components=1 ; do sleep 1; done
 
 RUN until wget -c -O /usr/local/bin/firebase ${COMMON_WGET_OPTIONS} \
         https://github.com/firebase/firebase-tools/releases/download/${FIREBASE_VERSION}/firebase-tools-linux; do sleep 1; done \
@@ -61,6 +61,9 @@ ENV CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 RUN wget -c -O - ${COMMON_WGET_OPTIONS} \
         https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar -C /usr/local/bin -xz
+
+RUN wget -c -O - ${COMMON_WGET_OPTIONS} \
+        https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz | tar -C /usr/local/bin -xz
 
 WORKDIR /home/app
 USER app
